@@ -3,36 +3,42 @@ package com.example.todomobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.todomobile.database.UserHelper;
+import com.example.todomobile.model.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseFirestore db;
+//    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = FirebaseFirestore.getInstance();
-        Map<String, Object> insertedData = new HashMap<>();
-        insertedData.put("name", "Kevin");
-        insertedData.put("age", 21);
-        insertedData.put("gender", "Male");
+        UserHelper userHelper = new UserHelper("AdminId");
+        Vector<User> users = userHelper.showUserList();
+//        userHelper.showUserList( new UserHelper.FirestoreCallback(){
+//            @Override
+//            public void onCallback(Vector<User> userVector) {
+//                for (User user : userVector) {
+//                    users.add(user);
+//                    Log.d("Data", user.getUserName());
+//                }
+//            }
+//        });
 
-        //Jika nama collectionPath asal, dia auto kebuat di db
-        //Jika db tidak diterima, dia auto id
-        //        db.collection("students")
-        //                .document("2201767623")
-        //                .set(insertedData);
-        db.collection("students")
-                .document()
-                .set(insertedData);
+        Integer totalUser = users.size();
+        System.out.println("Total User " + totalUser);
 
-        //db.collection("students").add(insertedData);
+        for (User user : users) {
+            Log.d("Data di Loop", user.getUserName());
+        }
 
     }
 }
