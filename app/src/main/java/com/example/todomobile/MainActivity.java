@@ -23,30 +23,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        db = FirebaseFirestore.getInstance();
-        Map<String, Object> insertedData = new HashMap<>();
-        insertedData.put("name", "Kevin");
-
-        Map<String, Object> insertedData = new HashMap<>();
-        insertedData.put("name", "WAKANDA");
-        insertedData.put("age", 21);
-        insertedData.put("gender", "Male");
-
-        //Jika nama collectionPath asal, dia auto kebuat di db
-        //Jika db tidak diterima, dia auto id
-        //        db.collection("students")
-        //                .document("2201767623")
-        //                .set(insertedData);
-//        db.collection("students")
-//                .document("2201767623")
-//                .set(insertedData);
-        db.collection("students")
-                .document()
-                .set(insertedData);
-
-        //db.collection("students").add(insertedData);
-
-        db.collection("students").add(insertedData);
     }
 }
