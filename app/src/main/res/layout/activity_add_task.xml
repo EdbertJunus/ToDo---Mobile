@@ -11,28 +11,43 @@
         android:id="@+id/addTask_et_taskName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:hint="What to do?" />
+        android:layout_marginBottom="50dp"
+        android:hint="What to do?"
+        android:textSize="50sp" />
 
     <EditText
         android:id="@+id/addTask_et_taskDesc"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/border"
         android:gravity="top"
         android:hint="Task description..."
-        android:inputType="text|textMultiLine" />
+        android:inputType="text|textMultiLine"
+        android:padding="10dp" />
 
     <TextView
         android:id="@+id/addTask_tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Date"/>
+        android:layout_marginBottom="20dp"
+        android:background="@color/black"
+        android:padding="10dp"
+        android:text="@string/pick_date"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/addTask_tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time"/>
+        android:background="@color/black"
+        android:padding="10dp"
+        android:text="@string/pick_time"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"

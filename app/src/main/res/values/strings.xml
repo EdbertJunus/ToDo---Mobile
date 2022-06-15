@@ -13,4 +13,8 @@
     <string name="have_acc">Have an account? Login now!</string>
     <string name="not_registered">Need account? Register now!</string>
     <string name="welcome_text">Welcome To Do!</string>
+    <string name="task_desc">[Task Desc]</string>
+    <string name="task_date">[Task Date]</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="pick_time">Pick Time</string>
 </resources>

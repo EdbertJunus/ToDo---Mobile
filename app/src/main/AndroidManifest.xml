@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoMobile">
-        <activity android:name=".AddTaskActivity"></activity>
+        <activity android:name=".TaskDetailActivity"></activity>
+        <activity android:name=".AddTaskActivity" />
         <activity android:name=".TaskActivity" />
-        <activity android:name=".RegisterActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" />

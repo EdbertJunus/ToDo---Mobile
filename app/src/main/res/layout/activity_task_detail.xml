@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".TaskDetailActivity">
+
+    <TextView
+        android:id="@+id/taskDetail_tv_taskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:text="@string/task_name"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/taskDetail_tv_taskDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/task_desc"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/taskDetail_tv_taskDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/task_date"
+        android:layout_marginBottom="100dp"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/taskDetail_btn_editTask"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Edit Task"/>
+
+    <Button
+        android:id="@+id/taskDetail_btn_removeTask"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Remove Task" />
+
+</LinearLayout>

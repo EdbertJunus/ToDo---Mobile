@@ -1,7 +1,5 @@
 package com.example.todomobile;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -14,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.todomobile.model.TaskItem;
 
@@ -57,8 +57,15 @@ public class AddTaskActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        month = month + 1;
-                        date = day + "/" + month + "/" + year;
+//                        month = month + 1;
+//                        date = day + "/" + month + "/" + year;
+
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, day);
+
+                        date = java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL).format(calendar.getTime());
                         tvDate.setText(date);
                     }
                 }, year, month, day);
@@ -89,11 +96,26 @@ public class AddTaskActivity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                taskList.add(new TaskItem("1", etTaskName.getText().toString(), etTaskDesc.getText().toString(), date, "10"));
-                Toast.makeText(AddTaskActivity.this, "Task added!", Toast.LENGTH_SHORT).show();
+                String taskName = etTaskName.getText().toString();
+                String taskDesc = etTaskDesc.getText().toString();
+                String dateTime = "";
 
-                Intent intent = new Intent(AddTaskActivity.this, TaskActivity.class);
-                startActivity(intent);
+                if (taskName.equals("")) {
+                    Toast.makeText(AddTaskActivity.this, "Task name cannot be empty!", Toast.LENGTH_SHORT).show();
+                } else if (taskDesc.equals("")) {
+                    Toast.makeText(AddTaskActivity.this, "Task description cannot be empty!", Toast.LENGTH_SHORT).show();
+                } else if (date.equals("") || time.equals("")) {
+                    Toast.makeText(AddTaskActivity.this, "Please pick date and time!", Toast.LENGTH_SHORT).show();
+                } else {
+                    dateTime = date + ", " + time;
+
+                    // taskId and userId to be changed later - from Kevin
+                    taskList.add(new TaskItem("1", etTaskName.getText().toString(), etTaskDesc.getText().toString(), dateTime, "10"));
+                    Toast.makeText(AddTaskActivity.this, "Task added!", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(AddTaskActivity.this, TaskActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

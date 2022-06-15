@@ -1,6 +1,7 @@
 package com.example.todomobile.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todomobile.R;
+import com.example.todomobile.TaskDetailActivity;
 import com.example.todomobile.model.TaskItem;
 
 import java.util.ArrayList;
@@ -39,6 +41,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         holder.tvTaskName.setText(task.getTaskName());
         holder.tvTaskTime.setText(task.getTaskDateTime());
+
+        holder.cvTask.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ctx, TaskDetailActivity.class);
+                intent.putExtra("taskName", task.getTaskName());
+                intent.putExtra("taskDesc", task.getTaskDescription());
+                intent.putExtra("taskDate", task.getTaskDateTime());
+                ctx.startActivity(intent);
+            }
+        });
     }
 
     @Override
