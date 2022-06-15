@@ -27,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
     ImageButton home_ib_btn;
 
-    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         UserHelper userHelper = new UserHelper("AdminId");
         Vector<User> users = userHelper.showUserList();
@@ -57,9 +55,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init(){
+//        Intent intent = new Intent(MainActivity.this, TaskActivity.class);
+//        startActivity(intent);
+
         home_ib_btn = findViewById(R.id.homepage_ib_button);
         home_ib_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, TaskActivity.class);
             startActivity(intent);
         });
     }
