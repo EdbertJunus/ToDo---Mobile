@@ -1,4 +1,9 @@
 package com.example.todomobile;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,13 +18,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-public class MainActivity extends AppCompatActivity {
-//    FirebaseFirestore db;
+import java.util.HashMap;
+import java.util.Map;
 
+public class MainActivity extends AppCompatActivity {
+
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         UserHelper userHelper = new UserHelper("AdminId");
         Vector<User> users = userHelper.showUserList();
@@ -39,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         for (User user : users) {
             Log.d("Data di Loop", user.getUserName());
         }
+
 
     }
 }
