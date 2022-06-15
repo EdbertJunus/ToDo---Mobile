@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+        <ImageView
+            android:id="@+id/login_iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login_image"
+            android:layout_marginBottom="10dp"
+            />
+
+        <TextView
+            android:id="@+id/login_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <EditText
+            android:id="@+id/login_et_email"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:drawableStart="@drawable/custom_img_email"
+            android:drawablePadding="10dp"
+            android:textSize="15sp"
+            android:layout_marginTop="-60dp"
+            />
+
+        <EditText
+            android:id="@+id/login_et_password"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/custom_img_password"
+            android:drawablePadding="10dp"
+            android:textSize="15sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_btn_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:height="40dp"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/purple_200"
+            android:text="@string/login"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_btn_regis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:height="40dp"
+            android:backgroundTint="@color/gray"
+            android:text="@string/not_registered"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

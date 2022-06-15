@@ -7,13 +7,16 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db;
+    ImageButton home_ib_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +40,15 @@ public class MainActivity extends AppCompatActivity {
                 .set(insertedData);
 
         db.collection("students").add(insertedData);
+
+        init();
+    }
+
+    public void init(){
+        home_ib_btn = findViewById(R.id.homepage_ib_button);
+        home_ib_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 }
