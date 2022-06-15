@@ -28,6 +28,11 @@ public class LoginActivity extends AppCompatActivity {
         login_btn_regis = findViewById(R.id.login_btn_regis);
 
         // login button
+        login_btn_log.setOnClickListener(view -> {
+            String user_email = login_et_email.getText().toString();
+            String user_pwd = login_et_pwd.getText().toString();
+
+        });
 
         // regis button
         login_btn_regis.setOnClickListener(view -> {

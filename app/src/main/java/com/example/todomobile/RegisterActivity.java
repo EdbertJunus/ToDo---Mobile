@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // Check if email exists
 //            boolean isUserExist = false;
-//            for (UsersDatabase user : userList) {
+//            for (User users : userList) {
 //                if(get_user_email.equals(user.getUser_email())){
 //                    isUserExist = true;
 //                }
