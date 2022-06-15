@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ToDoMobile</string>
+    <string name="task_name">[Task Name]</string>
 </resources>

@@ -7,6 +7,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.HashMap;
@@ -37,5 +38,8 @@ public class MainActivity extends AppCompatActivity {
                 .set(insertedData);
 
         db.collection("students").add(insertedData);
+
+        Intent intent = new Intent(MainActivity.this, TaskActivity.class);
+        startActivity(intent);
     }
 }
