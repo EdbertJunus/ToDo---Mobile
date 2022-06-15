@@ -9,37 +9,56 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
+<<<<<<<<< Temporary merge branch 1
+import com.google.firebase.firestore.FirebaseFirestore;
+
+=========
+>>>>>>>>> Temporary merge branch 2
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseFirestore db;
 
+    FirebaseFirestore db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         db = FirebaseFirestore.getInstance();
+<<<<<<<<< Temporary merge branch 1
+        Map<String, Object> insertedData = new HashMap<>();
+        insertedData.put("name", "Kevin");
+=========
 
         Map<String, Object> insertedData = new HashMap<>();
         insertedData.put("name", "WAKANDA");
+>>>>>>>>> Temporary merge branch 2
         insertedData.put("age", 21);
         insertedData.put("gender", "Male");
 
         //Jika nama collectionPath asal, dia auto kebuat di db
         //Jika db tidak diterima, dia auto id
+<<<<<<<<< Temporary merge branch 1
+        //        db.collection("students")
+        //                .document("2201767623")
+        //                .set(insertedData);
+=========
 //        db.collection("students")
 //                .document("2201767623")
 //                .set(insertedData);
+>>>>>>>>> Temporary merge branch 2
         db.collection("students")
                 .document()
                 .set(insertedData);
 
-        db.collection("students").add(insertedData);
+<<<<<<<<< Temporary merge branch 1
+        //db.collection("students").add(insertedData);
 
-        Intent intent = new Intent(MainActivity.this, TaskActivity.class);
-        startActivity(intent);
+=========
+        db.collection("students").add(insertedData);
+>>>>>>>>> Temporary merge branch 2
     }
 }
