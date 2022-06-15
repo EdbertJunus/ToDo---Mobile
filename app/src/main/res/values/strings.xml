@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">ToDoMobile</string>
     <string name="task_name">[Task Name]</string>
+    <string name="todo_app">
+        To Do is your daily
+        to-do-list application!
+    </string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="have_acc">Have an account? Login now!</string>
+    <string name="not_registered">Need account? Register now!</string>
+    <string name="welcome_text">Welcome To Do!</string>
 </resources>
