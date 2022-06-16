@@ -7,16 +7,36 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.example.todomobile.database.UserHelper;
+import com.example.todomobile.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Vector;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button login_btn_log, login_btn_regis;
     EditText login_et_email, login_et_pwd;
 
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    UserHelper uHelper = new UserHelper();
+
+    private Vector<User> userList = new Vector<>();
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        readUserData();
 
         init();
     }
@@ -32,12 +52,75 @@ public class LoginActivity extends AppCompatActivity {
             String user_email = login_et_email.getText().toString();
             String user_pwd = login_et_pwd.getText().toString();
 
+            // Check if email exists
+            boolean isUserExist = false;
+            boolean isPassCorrect = false;
+            for (User users : userList) {
+                if(user_email.equals(users.getUserEmail())){
+                    isUserExist = true;
+                    if(user_pwd.equals(users.getUserPassword())){
+                        isPassCorrect = true;
+                        userId = users.getUserId();
+                    }
+                }
+            }
+
+            // Email
+            if(user_email.isEmpty()){
+                login_et_email.setError("Email Cannot be Empty!");
+                return;
+            }
+            else if(!isUserExist){
+                login_et_email.setError("Email is not registered!");
+                return;
+            }
+
+            // Password
+            else if(user_pwd.isEmpty()){
+                login_et_email.setError("Password Cannot be Empty!");
+                return;
+            }
+            else if(!isPassCorrect){
+                login_et_email.setError("Password is not Correct!");
+                return;
+            }
+            else{
+                Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(LoginActivity.this, ...)
+//                intent.putExtra("UserId", userId);
+//                startActivity(intent);
+//                finish();
+            }
+
         });
 
         // regis button
         login_btn_regis.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
+        });
+    }
+
+    // Read Current User
+    private void readUserData() {
+        db.collection("user")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot snapshot : task.getResult()){
+                            User user = new User(snapshot.getId(),
+                                    snapshot.getString("UserEmail"),
+                                    snapshot.getString("UserName"),
+                                    snapshot.getString("UserPassword"));
+                            userList.add(user);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(Exception e) {
+                Toast.makeText(LoginActivity.this, "Read data failed!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

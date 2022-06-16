@@ -1,14 +1,18 @@
 package com.example.todomobile.database;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.todomobile.MainActivity;
+import com.example.todomobile.RegisterActivity;
 import com.example.todomobile.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,20 +31,35 @@ public class UserHelper {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String userId;
 
-
-    public UserHelper(String userId) {
-        this.userId = userId;
+    public UserHelper() {
     }
 
-    public void addNewUser(String userName, String userEmail, String userPassword){
+    public void addNewUser(String userName, String userEmail, String userPassword, Context ctx){
         Map<String, Object> insertedData = new HashMap<>();
         insertedData.put("UserName", userName);
         insertedData.put("UserEmail", userEmail);
         insertedData.put("UserPassword", userPassword);
 
         db.collection("user")
-                .document(userId)
-                .set(insertedData);
+                .document()
+                .set(insertedData)
+                .addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(ctx, "Registration Success!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                ).addOnFailureListener(
+                new OnFailureListener() {
+                    @Override
+                    public void onFailure(Exception e) {
+                        Toast.makeText(ctx, "Registration Failed!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     public void updateUserData(String key, Object value){
