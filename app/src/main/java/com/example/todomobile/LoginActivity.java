@@ -77,19 +77,21 @@ public class LoginActivity extends AppCompatActivity {
 
             // Password
             else if(user_pwd.isEmpty()){
-                login_et_email.setError("Password Cannot be Empty!");
+                login_et_pwd.setError("Password Cannot be Empty!");
                 return;
             }
             else if(!isPassCorrect){
-                login_et_email.setError("Password is not Correct!");
+                login_et_pwd.setError("Password is not Correct!");
                 return;
             }
             else{
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(LoginActivity.this, ...)
-//                intent.putExtra("UserId", userId);
-//                startActivity(intent);
-//                finish();
+                // Ganti ke task activity
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("UserId", userId);
+//                Toast.makeText(this, "User Id: " + userId, Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                finish();
             }
 
         });
