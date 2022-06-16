@@ -17,4 +17,8 @@
     <string name="task_date">[Task Date]</string>
     <string name="pick_date">Pick Date</string>
     <string name="pick_time">Pick Time</string>
+    <string name="profile">User Profile</string>
+    <string name="change_pwd">Change Password</string>
+    <string name="old_pwd">Old Password</string>
+    <string name="new_pwd">New Password</string>
 </resources>

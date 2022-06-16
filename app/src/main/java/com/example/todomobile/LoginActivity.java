@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     UserHelper uHelper = new UserHelper();
 
-    private Vector<User> userList = new Vector<>();
+    private ArrayList<User> userList = new ArrayList<>();
     private String userId;
 
     @Override
@@ -87,8 +89,9 @@ public class LoginActivity extends AppCompatActivity {
             else{
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
                 // Ganti ke task activity
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                 intent.putExtra("UserId", userId);
+                intent.putParcelableArrayListExtra("UserList", userList);
 //                Toast.makeText(this, "User Id: " + userId, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();

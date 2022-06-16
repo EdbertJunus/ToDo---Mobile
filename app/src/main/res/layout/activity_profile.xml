@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/profile_border"
+    android:padding="15dp"
+    android:layout_marginTop="40dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="100dp"
+    tools:context=".ProfileActivity">
+
+    <TextView
+        android:id="@+id/profile_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textColor="@color/purple_200"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textAlignment="viewStart"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:id="@+id/profile_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/profile_atr_border"
+        android:text="@string/name"
+        android:textAlignment="viewStart"
+        android:textColor="@color/gray"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textAlignment="viewStart"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <TextView
+        android:id="@+id/profile_tv_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textAlignment="viewStart"
+        android:textSize="18dp"
+        android:textColor="@color/gray"
+        android:background="@drawable/profile_atr_border"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/profile_atr_border"
+        android:layout_marginTop="40dp"
+        >
+
+        <TextView
+            android:id="@+id/profile_tv_changepwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_pwd"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textColor="@color/purple_200"
+            />
+
+        <EditText
+            android:id="@+id/profile_et_oldpwd"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="@string/old_pwd"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/custom_img_oldpwd"
+            android:drawablePadding="10dp"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <EditText
+            android:id="@+id/profile_et_newpwd"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:ems="10"
+            android:hint="@string/new_pwd"
+            android:inputType="textPassword"
+            android:drawableStart="@drawable/custom_img_password"
+            android:drawablePadding="10dp"
+            android:textSize="15sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/profile_btn_changepwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="300dp"
+            android:height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:backgroundTint="@color/purple_200"
+            android:text="@string/change_pwd"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
