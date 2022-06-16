@@ -19,8 +19,6 @@ import com.example.todomobile.model.TaskItem;
 
 import java.util.Calendar;
 
-import static com.example.todomobile.model.GlobalVariable.taskList;
-
 public class EditTaskActivity extends AppCompatActivity {
     private EditText etTaskName, etTaskDesc;
     private TextView tvDate, tvTime;

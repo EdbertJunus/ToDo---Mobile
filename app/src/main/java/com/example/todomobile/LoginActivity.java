@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.todomobile.database.UserHelper;
+import com.example.todomobile.model.GlobalVariable;
 import com.example.todomobile.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         login_btn_log.setOnClickListener(view -> {
             String user_email = login_et_email.getText().toString();
             String user_pwd = login_et_pwd.getText().toString();
+            String user_name = "";
 
             // Check if email exists
             boolean isUserExist = false;
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(user_pwd.equals(users.getUserPassword())){
                         isPassCorrect = true;
                         userId = users.getUserId();
+                        user_name = users.getUserName();
                     }
                 }
             }
@@ -86,10 +89,11 @@ public class LoginActivity extends AppCompatActivity {
             }
             else{
                 Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(LoginActivity.this, ...)
-//                intent.putExtra("UserId", userId);
-//                startActivity(intent);
-//                finish();
+                Intent intent = new Intent(LoginActivity.this, TaskActivity.class);
+                intent.putExtra("UserId", userId);
+                GlobalVariable.loggedUser = new User(userId, user_email, user_name, user_pwd);
+                startActivity(intent);
+                finish();
             }
 
         });

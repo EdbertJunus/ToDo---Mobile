@@ -2,25 +2,17 @@ package com.example.todomobile.database;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.todomobile.model.TaskItem;
-import com.example.todomobile.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.type.DateTime;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -33,24 +25,19 @@ public class TaskHelper {
     private DateTime TaskDateTime;
     private String UserId;
 
-    public TaskHelper(String taskId) {
-        TaskId = taskId;
-
-    }
-
-    public void addNewTask(String taskName, String taskDescription, DateTime taskDateTime, String userId){
+    public void addNewTask(String taskName, String taskDescription, String taskDateTime, String userId) {
         Map<String, Object> insertedData = new HashMap<>();
-        insertedData.put("TaskName", TaskName);
-        insertedData.put("TaskDescription", TaskDescription);
-        insertedData.put("TaskDateTime", TaskDateTime);
-        insertedData.put("UserId", UserId);
+        insertedData.put("TaskName", taskName);
+        insertedData.put("TaskDescription", taskDescription);
+        insertedData.put("TaskDateTime", taskDateTime);
+        insertedData.put("UserId", userId);
 
         db.collection("task")
                 .document(TaskId)
                 .set(insertedData);
     }
 
-    public void updateTask(String key, Object value){
+    public void updateTask(String key, Object value) {
         Map<String, Object> toBeUpdated = new HashMap<>();
         toBeUpdated.put(key, value);
 
@@ -59,7 +46,7 @@ public class TaskHelper {
                 .set(toBeUpdated);
     }
 
-    public Vector<TaskItem> showTaskList(){
+    public Vector<TaskItem> showTaskList() {
         Vector<TaskItem> tasks = new Vector<>();
 
 //        db.collection("task")
@@ -83,13 +70,13 @@ public class TaskHelper {
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(error != null){
+                        if (error != null) {
                             Log.e("Firestore", error.getMessage());
                             return;
                         }
 
-                        for(DocumentChange dc: value.getDocumentChanges()){
-                            if(dc.getType() == DocumentChange.Type.ADDED){
+                        for (DocumentChange dc : value.getDocumentChanges()) {
+                            if (dc.getType() == DocumentChange.Type.ADDED) {
                                 tasks.add(dc.getDocument().toObject(TaskItem.class));
                             }
                         }
@@ -100,7 +87,7 @@ public class TaskHelper {
         return tasks;
     }
 
-    public void removeTask(){
+    public void removeTask() {
         db.collection("task")
                 .document(TaskId)
                 .delete();

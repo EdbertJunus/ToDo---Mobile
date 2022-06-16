@@ -15,11 +15,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.todomobile.database.TaskHelper;
+import com.example.todomobile.database.UserHelper;
+import com.example.todomobile.model.GlobalVariable;
 import com.example.todomobile.model.TaskItem;
 
 import java.util.Calendar;
-
-import static com.example.todomobile.model.GlobalVariable.taskList;
 
 public class AddTaskActivity extends AppCompatActivity {
     private EditText etTaskName, etTaskDesc;
@@ -30,6 +31,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private String time = "";
     private int myHour = 0;
     private int myMinute = 0;
+
+    private final TaskHelper helper = new TaskHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +60,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-//                        month = month + 1;
-//                        date = day + "/" + month + "/" + year;
-
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(Calendar.YEAR, year);
                         calendar.set(Calendar.MONTH, month);
@@ -110,7 +110,8 @@ public class AddTaskActivity extends AppCompatActivity {
                     dateTime = date + ", " + time;
 
                     // taskId and userId to be changed later - from Kevin
-                    taskList.add(new TaskItem("1", etTaskName.getText().toString(), etTaskDesc.getText().toString(), dateTime, "10"));
+                    helper.addNewTask(etTaskName.getText().toString(), etTaskDesc.getText().toString(), dateTime, GlobalVariable.loggedUser.getUserId());
+
                     Toast.makeText(AddTaskActivity.this, "Task added!", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(AddTaskActivity.this, TaskActivity.class);
