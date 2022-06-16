@@ -17,4 +17,5 @@
     <string name="task_date">[Task Date]</string>
     <string name="pick_date">Pick Date</string>
     <string name="pick_time">Pick Time</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

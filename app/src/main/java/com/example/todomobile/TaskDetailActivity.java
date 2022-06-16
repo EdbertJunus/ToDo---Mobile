@@ -29,14 +29,24 @@ public class TaskDetailActivity extends AppCompatActivity {
         btnEditTask = findViewById(R.id.taskDetail_btn_editTask);
         btnRemoveTask = findViewById(R.id.taskDetail_btn_removeTask);
 
-        tvTaskName.setText(getIntent().getStringExtra("taskName"));
-        tvTaskDesc.setText(getIntent().getStringExtra("taskDesc"));
-        tvTaskDate.setText(getIntent().getStringExtra("taskDate"));
+        String taskName = getIntent().getStringExtra("taskName");
+        String taskDesc = getIntent().getStringExtra("taskDesc");
+        String taskDate = getIntent().getStringExtra("taskDate");
+        String[] dateTime = taskDate.split(",");
+
+        tvTaskName.setText(taskName);
+        tvTaskDesc.setText(taskDesc);
+        tvTaskDate.setText(taskDate);
 
         btnEditTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(TaskDetailActivity.this, EditTaskActivity.class);
+                intent.putExtra("taskName", taskName);
+                intent.putExtra("taskDesc", taskDesc);
+                intent.putExtra("taskDate", dateTime[0] + ", " + dateTime[1] + ", " + dateTime[2]);
+                intent.putExtra("taskTime", dateTime[3]);
+                startActivity(intent);
             }
         });
 
