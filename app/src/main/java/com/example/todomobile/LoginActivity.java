@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     UserHelper uHelper = new UserHelper();
 
-    private Vector<User> userList = new Vector<>();
+    private ArrayList<User> userList = new ArrayList<>();
     private String userId;
 
     @Override
@@ -80,11 +82,11 @@ public class LoginActivity extends AppCompatActivity {
 
             // Password
             else if(user_pwd.isEmpty()){
-                login_et_email.setError("Password Cannot be Empty!");
+                login_et_pwd.setError("Password Cannot be Empty!");
                 return;
             }
             else if(!isPassCorrect){
-                login_et_email.setError("Password is not Correct!");
+                login_et_pwd.setError("Password is not Correct!");
                 return;
             }
             else{
@@ -92,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, TaskActivity.class);
                 intent.putExtra("UserId", userId);
                 GlobalVariable.loggedUser = new User(userId, user_email, user_name, user_pwd);
+                
+                intent.putParcelableArrayListExtra("UserList", userList);
                 startActivity(intent);
                 finish();
             }
