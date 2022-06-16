@@ -19,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init(){
-//        Intent intent = new Intent(MainActivity.this, TaskActivity.class);
-//        startActivity(intent);
-
         home_ib_btn = findViewById(R.id.homepage_ib_button);
         home_ib_btn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);

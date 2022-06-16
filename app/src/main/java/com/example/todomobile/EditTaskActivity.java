@@ -1,5 +1,7 @@
 package com.example.todomobile;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -14,58 +16,55 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.todomobile.database.TaskHelper;
-import com.example.todomobile.database.UserHelper;
-import com.example.todomobile.model.GlobalVariable;
 import com.example.todomobile.model.TaskItem;
-import com.example.todomobile.model.User;
-import com.google.firebase.Timestamp;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-import static android.content.ContentValues.TAG;
-
-public class AddTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends AppCompatActivity {
     private EditText etTaskName, etTaskDesc;
     private TextView tvDate, tvTime;
-    private Button btnAddTask;
+    private Button btnSaveChanges;
 
     private String date = "";
     private String time = "";
     private int myHour = 0;
     private int myMinute = 0;
 
-    private final TaskHelper helper = new TaskHelper();
+    private TaskHelper helper = new TaskHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_task);
+        setContentView(R.layout.activity_edit_task);
 
         init();
     }
 
     public void init() {
-        etTaskName = findViewById(R.id.addTask_et_taskName);
-        etTaskDesc = findViewById(R.id.addTask_et_taskDesc);
-        tvDate = findViewById(R.id.addTask_tv_date);
-        tvTime = findViewById(R.id.addTask_tv_time);
-        btnAddTask = findViewById(R.id.addTask_btn_addTask);
+        etTaskName = findViewById(R.id.editTask_et_taskName);
+        etTaskDesc = findViewById(R.id.editTask_et_taskDesc);
+        tvDate = findViewById(R.id.editTask_tv_date);
+        tvTime = findViewById(R.id.editTask_tv_time);
+        btnSaveChanges = findViewById(R.id.editTask_btn_saveChanges);
 
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        date = getIntent().getStringExtra("taskDate");
+        time = getIntent().getStringExtra("taskTime");
+
+        etTaskName.setText(getIntent().getStringExtra("taskName"));
+        etTaskDesc.setText(getIntent().getStringExtra("taskDesc"));
+        tvDate.setText(date);
+        tvTime.setText(time);
+
         tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(EditTaskActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         Calendar calendar = Calendar.getInstance();
@@ -84,7 +83,7 @@ public class AddTaskActivity extends AppCompatActivity {
         tvTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(AddTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                TimePickerDialog timePickerDialog = new TimePickerDialog(EditTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hour, int minute) {
                         myHour = hour;
@@ -101,7 +100,7 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
-        btnAddTask.setOnClickListener(new View.OnClickListener() {
+        btnSaveChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String taskName = etTaskName.getText().toString();
@@ -109,20 +108,24 @@ public class AddTaskActivity extends AppCompatActivity {
                 String dateTime = "";
 
                 if (taskName.equals("")) {
-                    Toast.makeText(AddTaskActivity.this, "Task name cannot be empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditTaskActivity.this, "Task name cannot be empty!", Toast.LENGTH_SHORT).show();
                 } else if (taskDesc.equals("")) {
-                    Toast.makeText(AddTaskActivity.this, "Task description cannot be empty!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditTaskActivity.this, "Task description cannot be empty!", Toast.LENGTH_SHORT).show();
                 } else if (date.equals("") || time.equals("")) {
-                    Toast.makeText(AddTaskActivity.this, "Please pick date and time!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditTaskActivity.this, "Please pick date and time!", Toast.LENGTH_SHORT).show();
                 } else {
                     dateTime = date + ", " + time;
 
-                    // taskId and userId to be changed later - from Kevin
-                    helper.addNewTask(etTaskName.getText().toString(), etTaskDesc.getText().toString(), dateTime, GlobalVariable.loggedUser.getUserId());
+                    // modify task using taskId and userId - from Kevin
+                    String taskId = getIntent().getStringExtra("taskId");
 
-                    Toast.makeText(AddTaskActivity.this, "Task added!", Toast.LENGTH_SHORT).show();
+                    Log.d("koko", "onClick: " + taskId);
 
-                    Intent intent = new Intent(AddTaskActivity.this, TaskActivity.class);
+                    helper.updateTask(taskId, taskName, taskDesc, dateTime);
+
+                    Toast.makeText(EditTaskActivity.this, "Task updated!", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(EditTaskActivity.this, TaskActivity.class);
                     startActivity(intent);
                 }
             }

@@ -1,7 +1,6 @@
 package com.example.todomobile.model;
 
-import com.google.type.Date;
-import com.google.type.DateTime;
+import com.google.firebase.Timestamp;
 
 public class TaskItem {
     private String TaskId;
@@ -9,6 +8,9 @@ public class TaskItem {
     private String TaskDescription;
     private String TaskDateTime;
     private String UserId;
+
+    public TaskItem() {
+    }
 
     public TaskItem(String taskId, String taskName, String taskDescription, String taskDateTime, String userId) {
         TaskId = taskId;

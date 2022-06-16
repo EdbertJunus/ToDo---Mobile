@@ -2,6 +2,7 @@ package com.example.todomobile.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.todomobile.R;
 import com.example.todomobile.TaskDetailActivity;
 import com.example.todomobile.model.TaskItem;
+import com.google.firebase.Timestamp;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private Context ctx;
@@ -39,6 +44,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull TaskAdapter.ViewHolder holder, int position) {
         TaskItem task = taskList.get(position);
 
+//        Timestamp timestamp = (Timestamp) task.getTaskDateTime();
+//
+//        Date date = timestamp.toDate();
+//        DateFormat df = new SimpleDateFormat("E, dd MMM, hh:mm aa");
+//        String strDate = df.format(date);
+
         holder.tvTaskName.setText(task.getTaskName());
         holder.tvTaskTime.setText(task.getTaskDateTime());
 
@@ -46,6 +57,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ctx, TaskDetailActivity.class);
+                Log.d("papamu", task.getTaskId());
+                intent.putExtra("taskId", task.getTaskId());
                 intent.putExtra("taskName", task.getTaskName());
                 intent.putExtra("taskDesc", task.getTaskDescription());
                 intent.putExtra("taskDate", task.getTaskDateTime());
