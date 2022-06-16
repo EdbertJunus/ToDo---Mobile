@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todomobile.adapter.TaskAdapter;
+import com.example.todomobile.model.GlobalVariable;
 import com.example.todomobile.model.TaskItem;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -24,9 +25,9 @@ import java.util.ArrayList;
 
 public class TaskActivity extends AppCompatActivity {
     private RecyclerView rvTask;
-    private ImageView ivAddTask;
+    private ImageView ivProfile, ivAddTask;
 
-    private ProgressDialog progressDialog;
+//    private ProgressDialog progressDialog;
     private ArrayList<TaskItem> taskList = new ArrayList<>();
     private TaskAdapter taskAdapter = new TaskAdapter(this, taskList);
 
@@ -41,18 +42,27 @@ public class TaskActivity extends AppCompatActivity {
     }
 
     public void init() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Getting your tasks ready...");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setMessage("Getting your tasks ready...");
+//        progressDialog.show();
 
         rvTask = findViewById(R.id.task_rv_taskList);
+        ivProfile = findViewById(R.id.task_iv_profile);
         ivAddTask = findViewById(R.id.task_iv_addTask);
 
         db = FirebaseFirestore.getInstance();
 
         rvTask.setAdapter(taskAdapter);
         rvTask.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        ivProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TaskActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ivAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,27 +82,30 @@ public class TaskActivity extends AppCompatActivity {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null) {
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                            }
+//                            if (progressDialog.isShowing()) {
+//                                progressDialog.dismiss();
+//                            }
                             Log.e("Firestore Error", error.getMessage());
                             return;
                         }
 
                         for (DocumentChange dc : value.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
-                                taskList.add(dc.getDocument().toObject(TaskItem.class));
-                                Log.d("yoho", dc.getDocument().toObject(TaskItem.class).getTaskId() + "");
+                                TaskItem task = new TaskItem(dc.getDocument().getId(), dc.getDocument().get("TaskName").toString(), dc.getDocument().get("TaskDescription").toString(), dc.getDocument().get("TaskDateTime").toString(), GlobalVariable.loggedUser.getUserId());
+//                                taskList.add(dc.getDocument().toObject(TaskItem.class));
+                                taskList.add(task);
+
+                                Log.d("yoho", dc.getDocument().getId() + "");
                                 Log.d("yoho", dc.getDocument().toObject(TaskItem.class).getTaskName() + "");
                                 Log.d("yoho", dc.getDocument().toObject(TaskItem.class).getTaskDescription() + "");
                                 Log.d("yoho", dc.getDocument().toObject(TaskItem.class).getTaskDateTime() + "");
                                 Log.d("yoho", dc.getDocument().toObject(TaskItem.class).getUserId() + "");
-                                Log.d("yoho", dc.getDocument() + "");
+                                Log.d("yoho", dc.getDocument().get("TaskDateTime").getClass() + "");
                             }
                             taskAdapter.notifyDataSetChanged();
-                            if (progressDialog.isShowing()) {
-                                progressDialog.dismiss();
-                            }
+//                            if (progressDialog.isShowing()) {
+//                                progressDialog.dismiss();
+//                            }
                         }
                     }
                 });

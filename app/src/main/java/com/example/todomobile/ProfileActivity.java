@@ -27,7 +27,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProfileActivity extends AppCompatActivity {
-
     Button profile_btn_changepwd;
     EditText profile_et_oldpwd, profile_et_newpwd;
     TextView profile_tv_name, profile_tv_email;

@@ -6,17 +6,17 @@ public class TaskItem {
     private String TaskId;
     private String TaskName;
     private String TaskDescription;
-    private Timestamp TaskDateTime;
+    private String TaskDateTime;
     private String UserId;
 
     public TaskItem() {
     }
 
-    public TaskItem(String taskId, String taskName, String taskDescription, Timestamp taskDateTime, String userId) {
+    public TaskItem(String taskId, String taskName, String taskDescription, String taskDateTime, String userId) {
         TaskId = taskId;
         TaskName = taskName;
         TaskDescription = taskDescription;
-        TaskDateTime = (Timestamp) taskDateTime;
+        TaskDateTime = taskDateTime;
         UserId = userId;
     }
 
@@ -44,11 +44,11 @@ public class TaskItem {
         TaskDescription = taskDescription;
     }
 
-    public Timestamp getTaskDateTime() {
+    public String getTaskDateTime() {
         return TaskDateTime;
     }
 
-    public void setTaskDateTime(Timestamp taskDateTime) {
+    public void setTaskDateTime(String taskDateTime) {
         TaskDateTime = taskDateTime;
     }
 

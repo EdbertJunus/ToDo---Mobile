@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.todomobile.database.TaskHelper;
 import com.example.todomobile.model.TaskItem;
 
 import java.util.Calendar;
@@ -28,6 +30,8 @@ public class EditTaskActivity extends AppCompatActivity {
     private String time = "";
     private int myHour = 0;
     private int myMinute = 0;
+
+    private TaskHelper helper = new TaskHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,11 @@ public class EditTaskActivity extends AppCompatActivity {
                     dateTime = date + ", " + time;
 
                     // modify task using taskId and userId - from Kevin
+                    String taskId = getIntent().getStringExtra("taskId");
+
+                    Log.d("koko", "onClick: " + taskId);
+
+                    helper.updateTask(taskId, taskName, taskDesc, dateTime);
 
                     Toast.makeText(EditTaskActivity.this, "Task updated!", Toast.LENGTH_SHORT).show();
 

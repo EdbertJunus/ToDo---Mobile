@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,8 +20,15 @@ import com.example.todomobile.database.TaskHelper;
 import com.example.todomobile.database.UserHelper;
 import com.example.todomobile.model.GlobalVariable;
 import com.example.todomobile.model.TaskItem;
+import com.example.todomobile.model.User;
+import com.google.firebase.Timestamp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 public class AddTaskActivity extends AppCompatActivity {
     private EditText etTaskName, etTaskDesc;
