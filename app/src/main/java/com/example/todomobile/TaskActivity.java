@@ -60,6 +60,8 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TaskActivity.this, ProfileActivity.class);
+                intent.putExtra("UserId", GlobalVariable.loggedUser.getUserId());
+                intent.putParcelableArrayListExtra("UserList", LoginActivity.userList);
                 startActivity(intent);
             }
         });

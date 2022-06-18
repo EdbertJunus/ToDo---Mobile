@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     UserHelper uHelper = new UserHelper();
 
-    private ArrayList<User> userList = new ArrayList<>();
+    public static ArrayList<User> userList = new ArrayList<>();
     private String userId;
 
     @Override
